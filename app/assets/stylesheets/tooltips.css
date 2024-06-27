@@ -1,0 +1,13 @@
+.tippy-box[data-theme~='menu'] {
+  @apply py-1 px-4 rounded text-sm text-center text-gray-100 bg-black;
+}
+
+.tippy-box[data-theme~='explanation'] {
+  box-shadow: 0px 0px 5px 0px rgba(36,65,107,0.4);
+  @apply p-2 rounded bg-gray-100;
+}
+
+.tippy-box[data-theme~='dropdown-profile'] {
+  box-shadow: 0px 0px 5px 0px rgba(36,65,107,0.4);
+  @apply rounded;
+}

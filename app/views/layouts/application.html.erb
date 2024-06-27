@@ -11,9 +11,23 @@
   </head>
 
   <body>
+    <div class="grid-container">
+      <div class="navbar">
+        <%= render(NavbarComponent.new) %>
+      </div>
+
+      <div class="app-content">
+        <%= yield %>
+      </div>
+
+      <div class="footer">
+        <%= render(FooterComponent.new) %>
+      </div>
+
+    </div>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
 
   </body>
 </html>

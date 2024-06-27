@@ -1,0 +1,32 @@
+.grid-container {
+  display: grid;
+  height: 100vh; /* Use 100vh to take full viewport height */
+  width: 100%;
+  grid-template-rows: 80px 1fr 50px; /* Add height for footer */
+  grid-template-areas: 
+    "navbar"
+    "app"
+    "footer";
+  @apply bg-white;
+}
+
+.navbar {
+  grid-area: navbar;
+}
+
+.app-content {
+  grid-area: app;
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 10px; /* Optional: Add padding if needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  margin: 0 auto; /* Center the content horizontally */
+  max-width: 66.666%; /* 2/3 of the parent container */
+}
+
+
+.footer {
+  grid-area: footer;
+  text-align: center; /* Center the footer content */
+}
