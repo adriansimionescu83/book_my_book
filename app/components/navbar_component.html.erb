@@ -1,0 +1,11 @@
+<div class="w-full bg-zinc-300 shadow-dark px-4 py-1 flex justify-between items-center gap-4 relative z-999">
+	<%= link_to books_path do %>
+		<%= image_tag 'bookwheel_logo.png', width: '60', height: '60', class: 'm-auto rounded-full' %>
+	<% end %>	  
+  
+  <div class="px-4">
+		<%= render(UserDropdownComponent.new) %>
+	</div>
+</div>
+
+

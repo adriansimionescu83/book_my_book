@@ -1,0 +1,40 @@
+		<div class="w-full">
+			<%# AVATAR %>
+
+      <% if user_signed_in? %>
+        <div class="w-full flex justify-start items-center px-2 gap-4"
+            data-tooltip="dropdown"
+            data-theme="dropdown-profile"
+            data-tippy-placement="right-end"
+            data-content="template.profile_dropdown">
+          <div class="flex-shrink-0 w-[40px] h-[40px] bg-green-100 text-green-700 hover:bg-green-200 cursor-pointer rounded-full flex relative my-1">
+            <span class='m-auto'><%= current_user.initials %></span>
+          </div>
+        </div>
+        <%# PROFILE DROPDOWN %>
+        <template id="profile_dropdown">
+          <div class="w-[300px]">
+            <div class="w-full bg-dark-300 rounded-tl rounded-tr p-2">
+              <div class="w-full flex justify-start items-center px-2 gap-4 mb-4">
+                <div class="flex-shrink-0 w-[40px] h-[40px] bg-green-100 text-green-700 hover:bg-green-200 cursor-pointer rounded-full flex relative my-1">
+                  <span class='m-auto'><%= current_user.initials %></span>
+                </div>
+                <div class="w-full text-gray-400"><%= current_user.full_name %></div>
+              </div>
+              <%= link_to 'Edit Profile', edit_user_registration_path(current_user), class: 'block text-gray-400 hover:text-gray-100 px-2 py-1' %>
+            </div>
+            <div class="w-full bg-dark-100 rounded-bl rounded-br px-2 py-1">
+              <%= link_to destroy_user_session_path, method: 'delete', class: "p-2 flex justify-start items-center gap-2 text-gray-400 hover:text-gray-100" do %>
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Sign-out</span>
+              <% end %>
+            </div>
+          </div>
+        </template>
+      <% else %>
+        <div class="action-btn">
+          <%= link_to "Login", new_user_session_path %>
+        </div>
+      <% end %>
+
+		</div>
