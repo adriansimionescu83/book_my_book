@@ -15,7 +15,16 @@ class BooksController < ApplicationController
   end
 
   def create
+    @book = Book.create(permitted_params)
+
+    @book.user = current_user
     authorize @book
+  
+    if @book.save
+      redirect_to my_books_books_path, notice: 'Book was successfully created.'
+    else
+      render :new
+    end
   end
 
   def edit
@@ -39,5 +48,9 @@ class BooksController < ApplicationController
 
   def set_book
     @book = Book.find(params[:id])
+  end
+
+  def permitted_params
+    params.require(:book).permit(:title, :author, :price)
   end
 end

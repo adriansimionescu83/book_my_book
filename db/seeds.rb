@@ -10,12 +10,17 @@
 require 'faker'
 
 statuses = ['available', 'sold', 'reserved']
-user_ids = User.all.ids # Adjust this range based on your actual user IDs.
+user_ids = User.pluck(:id) # Retrieve all user IDs.
 
 50.times do
+  min_age = rand(5..10) # Random starting age
+  max_age = min_age + rand(1..5) # Random end age ensuring it is higher than min_age
+
   Book.create!(
     title: Faker::Book.title,
     author: Faker::Book.author,
+    description: Faker::Lorem.sentence(word_count: 20), # Generates a short description
+    age_recommendation: (min_age..max_age), # Sets the age range as an int4range
     user_id: user_ids.sample, # Randomly assigns one of the user IDs
     price: Faker::Commerce.price(range: 5.0..50.0), # Generates a price between $5.0 and $50.0
     status: statuses.sample # Randomly assigns one of the statuses
