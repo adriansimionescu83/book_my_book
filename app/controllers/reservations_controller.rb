@@ -10,6 +10,7 @@ class ReservationsController < ApplicationController
   end
 
   def new
+    @reservation = Reservation.new
     authorize @reservation
   end
 
