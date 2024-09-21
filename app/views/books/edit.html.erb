@@ -1,2 +1,46 @@
-<h1>Books#edit</h1>
-<p>Find me in app/views/books/edit.html.erb</p>
+<%= form_with(model: @book, local: true, class: "max-w-3xl mx-auto p-6 bg-blue-50 rounded shadow-md") do |form| %>
+  <div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700">
+      Title <span class="text-red-500">*</span>
+    </label>
+    <%= form.text_field :title, required: true, class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+  
+  <div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700">
+      Author <span class="text-red-500">*</span>
+    </label>
+    <%= form.text_field :author, required: true, class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+  
+  <div class="mb-4">
+    <%= form.label :description, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_area :description, class: "mt-1 block w-full min-w-[18rem] h-40 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :category_id, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, {}, { class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
+  </div>
+  
+  <div class="mb-4">
+    <%= form.label :language_id, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.collection_select :language_id, Language.all, :id, :name, {}, { class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700">
+      Price <span class="text-red-500">*</span> <span class="text-gray-500">(AED)</span>
+    </label>
+    <%= form.number_field :price, required: true, class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+  
+  <div class="mb-4">
+    <%= form.label :status, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.select :status, [['Available', 'available'], ['Sold', 'sold'], ['Reserved', 'reserved']], {}, { class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
+  </div>
+
+  <div>
+    <%= form.submit 'Save changes', class: "mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" %>
+  </div>
+<% end %>

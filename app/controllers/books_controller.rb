@@ -33,6 +33,12 @@ class BooksController < ApplicationController
 
   def update
     authorize @book
+
+    if @book.update(permitted_params)
+      redirect_to my_books_books_path, notice: 'Book was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   def destroy
