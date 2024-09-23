@@ -95,6 +95,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dockerfile-rails (1.6.17)
+      rails (>= 3.0.0)
     erubi (1.13.0)
     faker (3.4.2)
       i18n (>= 1.8.11, < 2)
@@ -249,6 +251,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   devise (~> 4.9, >= 4.9.3)
+  dockerfile-rails (>= 1.6)
   faker
   jbuilder
   jsbundling-rails
