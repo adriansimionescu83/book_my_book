@@ -6,7 +6,7 @@
         <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
           <!-- Book Image -->
           <div class="relative">
-          <%= image_tag "bookwheel_logo.png", alt: book.title, class: "w-full h-48 object-cover" %>
+          <%= cl_image_tag book.photo.key, alt: book.title, class: "w-full h-48 object-cover" %>
           </div>
 
           <!-- Book Info -->
