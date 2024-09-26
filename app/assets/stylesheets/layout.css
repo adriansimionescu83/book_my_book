@@ -16,17 +16,26 @@
 
 .app-content {
   grid-area: app;
-  overflow-y: scroll; /* Ensure vertical scrolling */
+  overflow-y: auto; /* Allow vertical scrolling if the content exceeds visible area */
   scrollbar-width: none; /* Hide scrollbar for Firefox */
-  -ms-overflow-style: none; /* Hi* Enable vertical scrolling */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
   padding: 10px; /* Optional: Add padding if needed */
   display: flex;
   flex-direction: column;
   align-items: center; /* Center items horizontally */
   margin: 0 auto; /* Center the content horizontally */
-  max-width: 80%; /* of the parent container */
+  width: 80%; /* Limit the width of the app content */
+  height: calc(100vh - 130px); /* Adjust the height to fit in the viewport minus navbar and footer heights */
 }
 
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.app-content::-webkit-scrollbar {
+  display: none; /* Optional: To hide scrollbar */
+}
+
+.book-show {
+  width: 100%; /* Ensures the component takes the full width of its parent */
+}
 
 .footer {
   grid-area: footer;
@@ -44,4 +53,3 @@
 .cards-grid::-webkit-scrollbar {
   display: none;
 }
-
