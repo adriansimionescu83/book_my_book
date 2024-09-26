@@ -40,6 +40,12 @@
     <%= form.select :status, [['Available', 'available'], ['Sold', 'sold'], ['Reserved', 'reserved']], {}, { class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
   </div>
 
+  <div class="mb-4">
+    <%= form.label :photo, "Upload Photo", class: "block text-sm font-medium text-gray-700" %>
+    <%= form.file_field :photo, class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+
+
   <div>
     <%= form.submit 'Save changes', class: "mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded w-full" %>
   </div>

@@ -8,6 +8,7 @@
 
 # Create the books
 require 'faker'
+require 'open-uri'
 
 # db/seeds.rb
 
@@ -126,7 +127,12 @@ Book.all.destroy_all
   min_age = rand(5..10) # Random starting age
   max_age = min_age + rand(1..5) # Random end age ensuring it is higher than min_age
 
-  Book.create!(
+  # Upload an image to Cloudinary and store the result
+  # uploaded_image = Cloudinary::Uploader.upload(Faker::LoremFlickr.image(size: "400x600", search_terms: ['books']))
+
+  file = URI.parse(Faker::LoremFlickr.image(size: "400x600", search_terms: ['books'])).open
+
+  book = Book.create!(
     title: Faker::Book.title,
     author: Faker::Book.author,
     description: Faker::Lorem.sentence(word_count: 100), # Generates a short description
@@ -134,8 +140,13 @@ Book.all.destroy_all
     language_id: Language.pluck(:id).sample, # Randomly assigns one of the language IDs
     user_id: user_ids.sample, # Randomly assigns one of the user IDs
     price: Faker::Commerce.price(range: 5.0..50.0), # Generates a price between $5.0 and $50.0
-    status: statuses.sample # Randomly assigns one of the statuses
+    status: statuses.sample, # Randomly assigns one of the statuses
   )
+
+  book.photo.attach(io: file, filename: "nes.png", content_type: "image/png")
+
+
 end
 
-puts "50 books have been created!"
+puts "50 books have been created with images!"
+

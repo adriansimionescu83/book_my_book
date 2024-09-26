@@ -34,7 +34,9 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # The below line was commented during the configuration of cloudinary as per instructions from Le Wagon Kitt
+  # config.active_storage.service = :local
+  config.active_storage.service = :cloudinary
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
