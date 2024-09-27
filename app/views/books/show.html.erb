@@ -37,8 +37,10 @@
 
       <!-- Action Buttons -->
       <div class="mt-6 flex gap-4">
-        <%= link_to 'Request to buy', new_reservation_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" %>
+        <%= button_to "Proceed to Buy", chats_path(book_id: @book.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" %>
       </div>
+
+
     </div>
   </div>
 </div>

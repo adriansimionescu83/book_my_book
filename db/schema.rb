@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_26_132650) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_27_113911) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,10 +64,30 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_26_132650) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.string "name"
+    t.bigint "book_owner_id", null: false
+    t.bigint "buyer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_owner_id"], name: "index_chats_on_book_owner_id"
+    t.index ["buyer_id"], name: "index_chats_on_buyer_id"
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.bigint "chat_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -101,6 +121,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_26_132650) do
   add_foreign_key "books", "categories"
   add_foreign_key "books", "languages"
   add_foreign_key "books", "users"
+  add_foreign_key "chats", "users", column: "book_owner_id"
+  add_foreign_key "chats", "users", column: "buyer_id"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "reservations", "books"
   add_foreign_key "reservations", "users"
 end
