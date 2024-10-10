@@ -8,6 +8,8 @@ class ChatPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
+      Rails.logger.debug("Current User ID: #{user.id}") # Check the current user
+
       scope.where("book_owner_id = ? OR buyer_id = ?", user.id, user.id)
     end
     

@@ -12,6 +12,25 @@
 
   <div class="mb-4">
     <label class="block text-sm font-medium text-gray-700">
+      First Name <span class="text-red-500">*</span>
+    </label>
+    <%= f.text_field :first_name, required: true, autofocus: true, autocomplete: "First Name", class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+
+    <div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700">
+      Last Name <span class="text-red-500">*</span>
+    </label>
+    <%= f.text_field :last_name, required: true, autofocus: true, autocomplete: "Last Name", class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :address, class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :address, autofocus: true, autocomplete: "address", class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-sm font-medium text-gray-700">
       Password <span class="text-red-500">*</span> 
       <% if @minimum_password_length %>
       <span class="text-gray-500">(<%= @minimum_password_length %> characters minimum)</span>

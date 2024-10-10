@@ -19,6 +19,9 @@
       
       <!-- Book Language -->
       <p class="text-gray-600 mt-2">Language: <%= @book.language.name %></p>
+
+      <!-- Sold By -->
+      <p class="text-gray-600 mt-2">Sold by: <%= @book.user.full_name %></p>
     </div>
 
     <div class="flex-grow mt-4 overflow-hidden">  

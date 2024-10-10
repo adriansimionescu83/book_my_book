@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_27_113911) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_10_113302) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_27_113911) do
     t.bigint "buyer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "book_id", null: false
+    t.index ["book_id"], name: "index_chats_on_book_id"
     t.index ["book_owner_id"], name: "index_chats_on_book_owner_id"
     t.index ["buyer_id"], name: "index_chats_on_buyer_id"
   end
@@ -121,6 +123,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_27_113911) do
   add_foreign_key "books", "categories"
   add_foreign_key "books", "languages"
   add_foreign_key "books", "users"
+  add_foreign_key "chats", "books"
   add_foreign_key "chats", "users", column: "book_owner_id"
   add_foreign_key "chats", "users", column: "buyer_id"
   add_foreign_key "messages", "chats"
