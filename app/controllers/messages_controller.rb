@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
     authorize @message  # Pundit: authorize this message
 
     if @message.save
-      redirect_to @chat, notice: "Message sent successfully."
+      redirect_to @chat
     else
       @messages = @chat.messages.order(created_at: :asc)
       render "chats/show"

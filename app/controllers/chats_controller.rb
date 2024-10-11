@@ -1,7 +1,6 @@
 # app/controllers/chats_controller.rb
 class ChatsController < ApplicationController
   before_action :authenticate_user!  # Devise ensures the user is logged in
-  after_action :verify_authorized, except: :create # Pundit authorization
  
   def create
     book = Book.find(params[:book_id]) # Assuming there's a Book model
@@ -10,6 +9,7 @@ class ChatsController < ApplicationController
 
     # Find or create a chat between this book owner and buyer
     @chat = Chat.find_or_create_by(book_owner: book_owner, buyer: buyer, book: book)
+    authorize @chat
 
     redirect_to @chat
   end
@@ -23,7 +23,5 @@ class ChatsController < ApplicationController
 
     # Pundit: authorize the access to this chat
     authorize @chat
-
-    @messages = @chat.messages.order(created_at: :asc)
   end
 end
