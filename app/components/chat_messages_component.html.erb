@@ -35,21 +35,13 @@
   
   <%# Messages List %>
   <div>
-    <div id="messages" class="border-b w-full bg-white h-[32rem] overflow-y-auto space-y-4 py-2">
+    <div id="messages" class="border-b w-full bg-white h-[32rem] overflow-y-auto space-y-2 py-2" data-chat-target="messages" style="scroll-behavior: auto; scrollTop: 9999;">
       <% @messages.each do |message| %>
-        <div class="w-full px-2">
-          <div class="flex <%= 'flex-row-reverse' if message.user == current_user %> justify-start items-start gap-1">
-            <div class="w-[20px] h-[20px] <%= message.user == current_user ? 'bg-blue-200': 'bg-gray-300' %> rounded-full flex m-1">
-              <span class='m-auto text-blue-800 text-xs'><%= message.user.initials %></span>
-            </div>
-
-            <p class="text-gray-700 border rounded-lg shadow-md px-2 py-1 <%= message.user == current_user ? 'bg-gray-100': 'bg-blue-100' %>"><%= message.content %></p>
-          </div>
-        </div>
+        <%= render(MessageComponent.new(message: message)) %>
       <% end %>
     </div>
 
-    <%= form_with(model: [@chat, Message.new], local: true, data: {chat_target: "form"}) do |form| %>
+    <%= form_with(model: [@chat, Message.new], local: true, data: {chat_target: "form", action: "turbo:submit-end->chat#resetForm" }) do |form| %>
       <div class="form-group m-2 pt-1">
         <%= form.text_area :content, rows: 2, autofocus: true, placeholder: "Type your message...", class: "w-full border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500", data: { action: "keypress->chat#submitOnEnter", chat_target: "input" } %>
       </div>

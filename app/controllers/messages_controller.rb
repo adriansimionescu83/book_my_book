@@ -11,7 +11,15 @@ class MessagesController < ApplicationController
     authorize @message  # Pundit: authorize this message
 
     if @message.save
-      redirect_to @chat
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append(:messages,
+            target: "messages",
+            html: render_to_string(MessageComponent.new(message: @message)))
+        end
+        format.html { redirect_to @chat }
+      end
+
     else
       @messages = @chat.messages.order(created_at: :asc)
       render "chats/show"
