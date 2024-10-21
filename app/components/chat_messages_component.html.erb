@@ -1,4 +1,4 @@
-<div class="container mx-auto w-full lg:w-1/2 border shadow rounded-md m-6" data-controller="chat">
+<div id="chat" data-chat_id="<%= @chat.id %>" class="container mx-auto w-full lg:w-1/2 border shadow rounded-md m-6" data-controller="chat">
   <%# User Details %>
   <div class="p-4 border-b gap-2 flex flex-start items-start">
     <div class="w-[50px] h-[50px] bg-gray-300 rounded-full flex m-1">
@@ -35,7 +35,9 @@
   
   <%# Messages List %>
   <div>
-    <div id="messages" class="border-b w-full bg-white h-[32rem] overflow-y-auto space-y-2 py-2" data-chat-target="messages" style="scroll-behavior: auto; scrollTop: 9999;">
+    <%= helpers.turbo_stream_from "chat_#{@chat.id}_messages" %>
+    
+    <div id="messages" class="messages border-b w-full bg-white h-[32rem] overflow-y-auto space-y-2 py-2" data-chat-target="messages" style="scroll-behavior: auto; scrollTop: 9999;">
       <% @messages.each do |message| %>
         <%= render(MessageComponent.new(message: message)) %>
       <% end %>

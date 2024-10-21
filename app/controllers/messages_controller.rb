@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
 
     authorize @message  # Pundit: authorize this message
 
-    if @message.save
+    if @message.save      
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.append(:messages,

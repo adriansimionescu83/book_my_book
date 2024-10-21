@@ -25,5 +25,4 @@ export default class extends Controller {
       this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight; // Scrolls the message container to the bottom
     }, timer); // Adjust the delay if needed
   }
-
 }

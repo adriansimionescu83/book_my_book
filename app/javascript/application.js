@@ -13,3 +13,4 @@ document.addEventListener("turbo:load", () => {
   // Initialize tooltips
   initializeTooltips(document);
 });
+import "./channels"
