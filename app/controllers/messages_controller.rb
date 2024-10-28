@@ -26,6 +26,12 @@ class MessagesController < ApplicationController
     end
   end
 
+  def show
+    @message = Message.find(params[:id])
+    byebug
+    authorize @message  # Pundit: authorize this message
+  end
+
   private
 
   def message_params

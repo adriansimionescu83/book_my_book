@@ -10,18 +10,21 @@ class Message < ApplicationRecord
   private
 
   def broadcast_message
-    # Render the MessageComponent into a string
+    # Identify the other user
+    other_user = user == chat.book_owner ? chat.buyer : chat.book_owner    
+
     rendered_message = ApplicationController.render(
-      MessageComponent.new(message: self),
+      template: "messages/show",
+      assigns: { message: self, current_user: self.user },
       layout: false
     )
-
-    # Now you can broadcast this rendered component
+  
+    # Broadcast the rendered HTML
     broadcast_append_to(
-      "chat_#{chat.id}_messages",
+      "chat_#{chat.id}_#{other_user.id}_messages",
       target: "messages",
-      html: rendered_message)
-
+      html: rendered_message
+    )
   end
 end
 
