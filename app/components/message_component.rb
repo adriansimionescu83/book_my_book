@@ -1,9 +1,8 @@
-# frozen_string_literal: true
-
 class MessageComponent < ViewComponent::Base
-  delegate :current_user, :formatted_message_time, to: :helpers
+  delegate :formatted_message_time, to: :helpers
 
-  def initialize(message:)
+  def initialize(message:, current_user:)
     @message = message
+    @current_user = current_user
   end
 end

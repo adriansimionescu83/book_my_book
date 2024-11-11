@@ -12,6 +12,13 @@
 
 development:
   adapter: solid_cable
+  database: book_my_book_development
+  polling_interval: 1.second
+  message_retention: 1.day
 
 production:
   adapter: solid_cable
+  database: book_my_book_production
+  polling_interval: 1.second
+  message_retention: 1.day
+

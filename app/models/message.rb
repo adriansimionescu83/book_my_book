@@ -9,22 +9,25 @@ class Message < ApplicationRecord
 
   private
 
-  def broadcast_message
-    # Identify the other user
-    other_user = user == chat.book_owner ? chat.buyer : chat.book_owner    
-
-    rendered_message = ApplicationController.render(
-      template: "messages/show",
-      assigns: { message: self, current_user: self.user },
-      layout: false
-    )
+  # def broadcast_message
+  #   rendered_message = ApplicationController.render(
+  #     template: "messages/_message",
+  #     assigns: { message: self },
+  #     layout: false
+  #   )
   
-    # Broadcast the rendered HTML
-    broadcast_append_to(
-      "chat_#{chat.id}_#{other_user.id}_messages",
-      target: "messages",
-      html: rendered_message
-    )
+  #   # Broadcast the rendered HTML
+  #   broadcast_append_to(
+  #     "chat_#{chat.id}_messages",
+  #     target: "messages",
+  #     html: rendered_message
+  #   )
+  # end
+
+  def broadcast_message
+    broadcast_append_to "chat_#{chat.id}_messages",
+                        partial: "messages/message",
+                        locals: { message: self, current_user: self.user }
   end
 end
 

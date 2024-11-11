@@ -12,11 +12,11 @@ class MessagesController < ApplicationController
 
     if @message.save      
       respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.append(:messages,
-            target: "messages",
-            html: render_to_string(MessageComponent.new(message: @message)))
-        end
+        # format.turbo_stream do
+        #   render turbo_stream: turbo_stream.append(:messages,
+        #     target: "messages",
+        #     html: render_to_string(MessageComponent.new(message: @message)))
+        # end
         format.html { redirect_to @chat }
       end
 
@@ -28,8 +28,10 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
-    byebug
     authorize @message  # Pundit: authorize this message
+
+    # Render the message component manually with current_user as an argument
+    @message_component = MessageComponent.new(message: @message, current_user: current_user)
   end
 
   private

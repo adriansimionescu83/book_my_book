@@ -5,11 +5,11 @@
     </small>
   </div>
   
-  <div class="flex <%= 'flex-row-reverse' if @message.user == current_user %> justify-start items-start gap-1">
-    <div class="w-[20px] h-[20px] <%= @message.user == current_user ? 'bg-blue-200': 'bg-gray-300' %> rounded-full flex m-1">
+  <div class="flex <%= 'flex-row-reverse' if @message.user == @current_user %> justify-start items-start gap-1">
+    <div class="w-[20px] h-[20px] <%= @message.user == @current_user ? 'bg-blue-200': 'bg-gray-300' %> rounded-full flex m-1">
       <span class='m-auto text-blue-800 text-xs'><%= @message.user.initials %></span>
     </div>
 
-    <p class="text-gray-700 border rounded-lg shadow-md px-2 py-1 <%= @message.user == current_user ? 'bg-gray-100': 'bg-blue-100' %>"><%= @message.content %></p>
+    <p class="text-gray-700 border rounded-lg shadow-md px-2 py-1 <%= @message.user == @current_user ? 'bg-gray-100': 'bg-blue-100' %>"><%= @message.content %></p>
   </div>
 </div>
