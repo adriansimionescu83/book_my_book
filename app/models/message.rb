@@ -9,25 +9,11 @@ class Message < ApplicationRecord
 
   private
 
-  # def broadcast_message
-  #   rendered_message = ApplicationController.render(
-  #     template: "messages/_message",
-  #     assigns: { message: self },
-  #     layout: false
-  #   )
-  
-  #   # Broadcast the rendered HTML
-  #   broadcast_append_to(
-  #     "chat_#{chat.id}_messages",
-  #     target: "messages",
-  #     html: rendered_message
-  #   )
-  # end
-
   def broadcast_message
     broadcast_append_to "chat_#{chat.id}_messages",
                         partial: "messages/message",
-                        locals: { message: self, current_user: self.user }
+                        locals: { message: self }
   end
+  
 end
 
