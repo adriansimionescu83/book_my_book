@@ -12,11 +12,11 @@ class MessagesController < ApplicationController
 
     if @message.save      
       respond_to do |format|
-        # format.turbo_stream do
-        #   render turbo_stream: turbo_stream.append(:messages,
-        #     target: "messages",
-        #     html: render_to_string(MessageComponent.new(message: @message, current_user: current_user)))
-        # end
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append(:messages,
+            target: "messages",
+            html: render_to_string(MessageComponent.new(message: @message, current_user: current_user)))
+        end
         format.html { redirect_to @chat }
       end
 
