@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   patch 'users/profile', to: 'profile#update', as: :update_user_profile
 
   resources :chats, only: %i[index create show] do 
-    resources :messages, only: %i[index new create show]
+    resources :messages, only: %i[index new create]
   end
 end

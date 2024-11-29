@@ -10,12 +10,14 @@ class Message < ApplicationRecord
   private
 
   def broadcast_message
-    # Identify the other user, the message receiver
-    receiving_user = user == chat.book_owner ? chat.buyer : chat.book_owner
-
-    broadcast_append_to "chat_#{chat.id}_#{receiving_user.id}_messages", target: "messages",
-                        partial: "messages/message",
-                        locals: { message: self, current_user: receiving_user }
+    # Identify all the users associated with the chat
+    users = [chat.book_owner, chat.buyer]
+    # For each user broadcast the new component
+    users.each do |user|
+      broadcast_append_to "chat_#{chat.id}_#{user.id}_messages", target: "messages",
+                          partial: "messages/message",
+                          locals: { message: self, current_user: user }
+    end
   end
   
 end

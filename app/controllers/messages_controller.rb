@@ -12,11 +12,6 @@ class MessagesController < ApplicationController
 
     if @message.save      
       respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.append(:messages,
-            target: "messages",
-            html: render_to_string(MessageComponent.new(message: @message, current_user: current_user)))
-        end
         format.html { redirect_to @chat }
       end
 
@@ -24,15 +19,6 @@ class MessagesController < ApplicationController
       @messages = @chat.messages.order(created_at: :asc)
       render "chats/show"
     end
-  end
-
-  def show
-    byebug
-    @message = Message.find(params[:id])
-    authorize @message  # Pundit: authorize this message
-
-    # Render the message component manually with current_user as an argument
-    @message_component = MessageComponent.new(message: @message, current_user: current_user)
   end
 
   private

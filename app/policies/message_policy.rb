@@ -16,8 +16,4 @@ class MessagePolicy < ApplicationPolicy
     # Only the book owner or buyer can send messages in the chat
     user == record.chat.book_owner || user == record.chat.buyer
   end
-
-  def show
-    create?
-  end
 end

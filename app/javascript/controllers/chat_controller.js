@@ -2,8 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["form", "input", "messages"]
+
+  newMessageAddedHandler = () => this.scrollOnMessageAdded()
+
   connect(){
+    window.addEventListener('new-message-added', this.newMessageAddedHandler);
     this.scrollToBottom(0);
+  }
+
+
+  disconnect(){
+    window.removeEventListener('new-message-added', this.newMessageAddedHandler);
   }
 
   // This method is called when the user presses a key in the input field

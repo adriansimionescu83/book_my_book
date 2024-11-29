@@ -9,3 +9,6 @@ application.register("chat", ChatController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import MessagePartialController from "./message_partial_controller"
+application.register("message-partial", MessagePartialController)
