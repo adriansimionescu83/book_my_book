@@ -1,0 +1,36 @@
+<div class="container mx-auto py-8 mx-4 w-full lg:w-1/2 border rounded shadow">
+  <h1 class="text-xl font-bold text-center pb-6 border-b ">Chats</h1>
+  <div class="flex flex-col w-full px-2">
+    <% if @chats.present? %>
+      <% @chats.each do |chat| %>
+        <%= link_to chat_path(chat), class: "chat" do %>
+          <div class="bg-white px-2 border-b overflow-hidden flex items-center">
+            <!-- Book Image -->
+            <div class="relative">
+              <%= cl_image_tag chat.book.photo.key, alt: chat.book.title, class: "w-[60px] h-[60px] w-object-cover rounded-lg" %>
+            </div>
+
+            <div class="flex flex-col flex-grow p-4 justify-between">
+              <!-- Book title  -->
+              <div>
+                <h2 class="text-sm font-semibold truncate mb-2">
+                  <%= chat.book.title %>
+                </h2>
+              </div>
+
+              <div class="flex flex-grow justify-between">
+                <p class="text-xs text-gray-600 truncate">
+                  <%= chat.book_owner == current_user ? chat.buyer.full_name : chat.book_owner.full_name %> 
+                </p>   
+              </div>
+    
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>  
+      <h2 class="text-sm text-center mt-3 font-semibold">No chats yet</h2>
+    <% end %>
+  </div>
+</div>
+

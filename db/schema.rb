@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_26_132650) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_31_105511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,20 +64,41 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_26_132650) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.string "name"
+    t.bigint "book_owner_id", null: false
+    t.bigint "buyer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "book_id", null: false
+    t.index ["book_id"], name: "index_chats_on_book_id"
+    t.index ["book_owner_id"], name: "index_chats_on_book_owner_id"
+    t.index ["buyer_id"], name: "index_chats_on_buyer_id"
+  end
+
   create_table "languages", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "reservations", force: :cascade do |t|
-    t.string "status"
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.bigint "chat_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "book_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_reservations_on_book_id"
-    t.index ["user_id"], name: "index_reservations_on_user_id"
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "solid_cable_messages", force: :cascade do |t|
+    t.text "channel"
+    t.text "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel"], name: "index_solid_cable_messages_on_channel"
+    t.index ["created_at"], name: "index_solid_cable_messages_on_created_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_26_132650) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_seen_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -101,6 +123,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_26_132650) do
   add_foreign_key "books", "categories"
   add_foreign_key "books", "languages"
   add_foreign_key "books", "users"
-  add_foreign_key "reservations", "books"
-  add_foreign_key "reservations", "users"
+  add_foreign_key "chats", "books"
+  add_foreign_key "chats", "users", column: "book_owner_id"
+  add_foreign_key "chats", "users", column: "buyer_id"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
 end

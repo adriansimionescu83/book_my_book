@@ -1,0 +1,56 @@
+<div id="chat" data-chat_id="<%= @chat.id %>" class="container mx-auto w-full lg:w-1/2 border shadow rounded-md m-6" data-controller="chat">
+  <%# User Details %>
+  <div class="p-4 border-b gap-2 flex flex-start items-start">
+    <div class="w-[50px] h-[50px] bg-gray-300 rounded-full flex m-1">
+      <span class='m-auto text-blue-700 text-lg'>
+        <%= @chat.book_owner == current_user ? @chat.buyer.initials : @chat.book_owner.initials %>
+      </span>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <h2 class="text-xl font-semibold">
+        <%= @chat.book_owner == current_user ? @chat.buyer.full_name : @chat.book_owner.full_name %>
+      </h2>
+      <span class="text-sm">
+        Last seen: <%= @chat.book_owner == current_user ? formatted_last_seen(@chat.buyer) : formatted_last_seen(@chat.book_owner) %>
+      </span>
+    </div>
+   
+  </div>
+
+  <%# Book Details %>
+  <%= link_to book_path(@chat.book), class: "book" do %>
+    <div class="flex justify-start gap-4 items-center p-2 border-b bg-gray-100">
+
+      <div class="relative">
+        <%= cl_image_tag @chat.book.photo.key, alt: @chat.book.title, class: "w-[80px] h-[80px] w-object-cover rounded-lg" %>
+      </div>
+
+      <h3 class="text-xl font-semibold m-2">
+        <%= @chat.book.title %>
+      </h3>
+
+    </div>
+  <% end %>
+  
+  <%# Messages List %>
+  <div>
+    <%= helpers.turbo_stream_from "chat_#{@chat.id}_#{current_user.id}_messages" %>
+
+    <div id="messages" data-stream-id="chat_<%= @chat.id %>_<%= current_user.id %>_messages" class="messages border-b w-full bg-white h-[32rem] overflow-y-auto space-y-2 py-2" data-chat-target="messages" style="scroll-behavior: auto; scrollTop: 9999;">
+      <% @messages.each do |message| %>
+        <%= render(MessageComponent.new(message: message, current_user: current_user)) %>
+      <% end %>
+
+    </div>
+
+    <%= form_with(model: [@chat, Message.new], local: true, data: {chat_target: "form", action: "turbo:submit-end->chat#resetForm" }) do |form| %>
+      <div class="form-group m-2 pt-1">
+        <%= form.text_area :content, rows: 2, autofocus: true, placeholder: "Type your message...", class: "w-full border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200 focus:border-blue-500", data: { action: "keypress->chat#submitOnEnter", chat_target: "input" } %>
+      </div>
+    <% end %>
+  </div>
+  
+</div>
+
+

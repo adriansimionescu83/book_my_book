@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :update_last_seen_at, if: :user_signed_in?
+
   include Pundit::Authorization
 
   # Pundit: allow-list approach
@@ -18,4 +21,17 @@ class ApplicationController < ActionController::Base
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
+
+  def update_last_seen_at
+    current_user.update_column(:last_seen_at, Time.current)
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :address])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :address])
+  end
+  
 end
+

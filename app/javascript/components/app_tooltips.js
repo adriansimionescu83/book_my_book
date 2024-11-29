@@ -1,7 +1,6 @@
 import tippy from 'tippy.js';
 import 'tippy.js/animations/shift-away.css';
 
-console.log('Hello')
 
 class MenuTooltips {
   constructor(elements){
@@ -64,19 +63,14 @@ class ExplanationTooltips {
 class Dropdowns {
   constructor(elements){
     this.elements = elements
-    console.log('Hey');
 
   }
 
   initialize(){
     this.elements.forEach(element => this.#initializeDropdown(element))
-    console.log('H0');
-
   }
 
   #initializeDropdown(element){
-    console.log('Let go');
-
     if (element._tippy) return;
 
     let content = element.dataset.content;
