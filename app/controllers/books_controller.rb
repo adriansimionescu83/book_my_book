@@ -3,6 +3,14 @@ class BooksController < ApplicationController
 
   def index
     @books = policy_scope(Book)
+
+    # Exclude the owner's books if the user is signed in
+    @books = @books.where.not(user_id: current_user.id) if user_signed_in?
+
+    # Apply the search query if present, maintaining other conditions
+    if params[:query].present?
+      @books = @books.merge(Book.global_search(params[:query]))
+    end
   end
 
   def show

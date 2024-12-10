@@ -1,4 +1,23 @@
 <div class="container mx-auto py-8 px-4">
+
+  <div class="w-50 pt-5 absolute top-0 left-1/2 transform -translate-x-1/2">
+    <div class="">
+      <%= form_tag books_path, method: :get, class: "flex items-center space-x-2" do %>
+        <div class="relative flex-grow">
+          <%= text_field_tag :query,
+            params[:query],
+            class: "w-full p-2 pl-10 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500",
+            placeholder: "Search by book title, author, or description",
+            id: "search-input" %>
+          <span id="icon-container" class="absolute inset-y-0 left-3 flex items-center cursor-pointer">
+            <i id="search-icon" class="fas fa-search text-gray-500"></i>
+          </span>
+        </div>
+        <%= submit_tag "", class: "hidden", id: "search-submit" %>
+      <% end %>
+    </div>
+  </div>
+
   <h1 class="text-3xl font-bold text-center mb-6">Available preloved books</h1>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
     <% @books.each do |book| %>
