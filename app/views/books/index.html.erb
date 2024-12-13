@@ -1,21 +1,23 @@
-  <div class="w-full p-4 bg-gray-300 flex flex-col items-center">
-    <div class="">
-
+<div class="w-full p-4 bg-gray-300 flex flex-col items-center">
+  <%= form_tag books_path, method: :get, class: "flex items-center space-x-2 w-full max-w-md relative" do %>
+    <div class="flex-grow relative">
+      <!-- Search Icon -->
+      <span id="icon-container" class="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+        <i id="search-icon" class="fa-solid fa-magnifying-glass text-gray-500"></i>
+      </span>
+      
+      <!-- Search Input -->
+      <%= text_field_tag :query,
+        params[:query],
+        class: "w-full pl-9 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500",
+        placeholder: "Search by book title, author, or description",
+        id: "search-input" %>
     </div>
-      <%= form_tag books_path, method: :get, class: "flex items-center space-x-2" do %>
-        <div class="flex-grow">
-          <%= text_field_tag :query,
-            params[:query],
-            class: "w-100 p-2 pl-1 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500",
-            placeholder: "Search by book title, author, or description",
-            id: "search-input" %>
-          <span id="icon-container" class="absolute inset-y-0 left-3 flex items-center cursor-pointer">
-            <i id="search-icon" class="fa-solid fa-magnifying-glass text-gray-500"></i>
-          </span>
-        </div>
-        <%= submit_tag "", class: "hidden", id: "search-submit" %>
-      <% end %>
-  </div>
+    <!-- Hidden Submit Button -->
+    <%= submit_tag "", class: "hidden", id: "search-submit" %>
+  <% end %>
+</div>
+
 
 <div class="container mx-auto py-8 px-4">
 
