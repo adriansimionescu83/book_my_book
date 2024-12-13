@@ -20,5 +20,5 @@
 	}
 
 	.menu-btn{
-		@apply cursor-pointer text-white hover:underline;
+		@apply cursor-pointer hover:underline;
 	}
