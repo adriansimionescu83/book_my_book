@@ -73,7 +73,7 @@ categories = Category.create!(
   ]
 )
 
-# Create languages
+# # Create languages
 languages = [
   "Mandarin Chinese",
   "Spanish",
@@ -111,17 +111,26 @@ languages.each do |language|
   Language.create(name: language)
 end
 
+# Destroy all books, chats and age groups if already created
+# Chat.destroy_all
+# Book.destroy_all
+# AgeGroup.destroy_all
+
+# Age groups
+AgeGroup.create([{ name: "0-2 years" }, { name: "3-5 years" }, { name: "6-8 years" }, { name: "9-12 years" }])
+
 # Create users (if not already created)
 user_ids = User.pluck(:id) # Retrieve all user IDs.
 
 # Create the books
 statuses = ['available', 'sold', 'reserved']
 
-50.times do
-  min_age = rand(5..10) # Random starting age
-  max_age = min_age + rand(1..5) # Random end age ensuring it is higher than min_age
+# Destroy all books if books are already created
+Chat.destroy_all
+Book.destroy_all
 
-  file = URI.parse(Faker::LoremFlickr.image(size: "400x600", search_terms: ['books'])).open
+50.times do
+  file = URI.parse(Faker::LoremFlickr.image(size: "400x600", search_terms: ['book'])).open
 
   book = Book.create!(
     title: Faker::Book.title,
@@ -129,13 +138,13 @@ statuses = ['available', 'sold', 'reserved']
     description: Faker::Lorem.sentence(word_count: 100), # Generates a short description
     category_id: Category.pluck(:id).sample, # Randomly assigns one of the category IDs
     language_id: Language.pluck(:id).sample, # Randomly assigns one of the language IDs
+    age_group_id: AgeGroup.pluck(:id).sample,
     user_id: user_ids.sample, # Randomly assigns one of the user IDs
     price: Faker::Commerce.price(range: 5.0..50.0), # Generates a price between $5.0 and $50.0
     status: statuses.sample, # Randomly assigns one of the statuses
   )
 
   book.photo.attach(io: file, filename: "nes.png", content_type: "image/png")
-
 
 end
 
