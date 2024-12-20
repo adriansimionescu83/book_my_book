@@ -2,32 +2,34 @@
 <html>
   <head>
     <title>BookMyBook</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
   </head>
 
   <body>
-    <div class="grid-container">
-      <div class="navbar">
+    <div class="page-container">
+      <header class="navbar">
         <%= render(NavbarComponent.new) %>
-      </div>
+      </header>
 
-      <div class="app-content">
+      <main class="app-content">
         <%= yield %>
-      </div>
+      </main>
 
-      <div class="footer">
+      <footer class="footer">
         <%= render(FooterComponent.new) %>
-      </div>
-
+      </footer>
     </div>
 
+    <!-- Rails flash messages -->
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
   </body>
 </html>

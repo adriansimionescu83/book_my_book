@@ -12,3 +12,6 @@ application.register("hello", HelloController)
 
 import MessagePartialController from "./message_partial_controller"
 application.register("message-partial", MessagePartialController)
+
+import SearchController from "./search_controller"
+application.register("search", SearchController)

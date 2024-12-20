@@ -19,12 +19,11 @@
   overflow-y: auto; /* Allow vertical scrolling if content exceeds the visible area */
   scrollbar-width: none; /* Hide scrollbar for Firefox */
   -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
-  padding: 10px; /* Optional: Add padding if needed */
   display: flex;
   flex-direction: column;
   align-items: center; /* Center items horizontally */
   margin: 0 auto; /* Center the content horizontally */
-  width: 80%; /* Limit the width of the app content */
+  width: 100%; /* Limit the width of the app content */
   min-height: 0; /* Ensure the content section grows and shrinks as needed */
 }
 
@@ -39,7 +38,6 @@
 .footer {
   grid-area: footer;
   text-align: center; /* Center the footer content */
-  padding: 10px 0; /* Optional: Add some padding for spacing */
 }
 
 /* For the cards grid container */
