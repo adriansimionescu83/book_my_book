@@ -117,7 +117,7 @@ require 'open-uri'
 # AgeGroup.destroy_all
 
 # Age groups
-AgeGroup.create([{ name: "0-2 years" }, { name: "3-5 years" }, { name: "6-8 years" }, { name: "9-12 years" }])
+AgeGroup.create([{ name: "0-2 Years (Babies and Toddlers)" }, { name: "3-5 Years (Preschoolers)" }, { name: "6-8 Years (Early Readers)" }, { name: "9-12 Years (Middle Grade)" } , { name: "13-18 Years (Young Adult)" }])
 
 # Create users (if not already created)
 user_ids = User.pluck(:id) # Retrieve all user IDs.

@@ -38,7 +38,6 @@
 .footer {
   grid-area: footer;
   text-align: center; /* Center the footer content */
-  padding: 10px 0; /* Optional: Add some padding for spacing */
 }
 
 /* For the cards grid container */

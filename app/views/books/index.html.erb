@@ -1,5 +1,5 @@
-<div class="w-full p-4 bg-violet-400 flex flex-col items-center">
-  <%= form_tag books_path, method: :get, class: "flex flex-col justify-between gap-2 items-center space-x-2 w-full max-w-md relative", data: { controller: "search" } do %>
+<div class="w-full p-4 bg-gradient-to-r from-blue-200 via-blue-100 to-cyan-100 flex flex-col items-center">
+  <%= form_tag books_path, method: :get, class: "flex flex-col justify-between gap-2 items-center w-[300px] relative", data: { controller: "search" } do %>
     <!-- Search Input -->
     <div class="flex-grow relative w-full">
       <!-- Search Icon -->
@@ -9,22 +9,22 @@
       <%= text_field_tag :query,
         params[:query],
         class: "w-full pl-9 p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500",
-        placeholder: "Search by book title, author, or description",
+        placeholder: "What are you looking for?",
         id: "search-input" %>
     </div>
 
-    <div class="flex justify-center items-center gap-3">
+    <div class="flex justify-between items-center gap-8 mx-auto w-full">
       <%# Category Search %>
       <div>
         <!-- Category Dropdown -->
         <div class="relative">
           <button
             type="button"
-            class="px-4 py-2 text-white rounded hover:font-semibold"
+            class="text-blue-700 rounded hover:font-semibold"
             data-action="click->search#toggleCategoryDropdown"
             id="category-dropdown-btn">
             Category
-            <i class="fa-solid fa-chevron-down ml-2"></i>
+            <i class="fa-solid fa-chevron-down"></i>
           </button>
 
           <!-- Dropdown Menu -->
@@ -53,11 +53,11 @@
         <div class="relative">
           <button
             type="button"
-            class="px-4 py-2 text-white rounded hover:font-semibold"
+            class="text-blue-700 rounded hover:font-semibold"
             data-action="click->search#toggleLanguageDropdown"
             id="language-dropdown-btn">
             Language
-            <i class="fa-solid fa-chevron-down ml-2"></i>
+            <i class="fa-solid fa-chevron-down"></i>
           </button>
 
           <!-- Dropdown Menu -->
@@ -86,11 +86,11 @@
         <div class="relative">
           <button
             type="button"
-            class="px-4 py-2 text-white rounded hover:font-semibold"
+            class="text-blue-700 rounded hover:font-semibold"
             data-action="click->search#toggleAgeGroupDropdown"
             id="age-group-dropdown-btn">
-            Age Groups
-            <i class="fa-solid fa-chevron-down ml-2"></i>
+            Age
+            <i class="fa-solid fa-chevron-down"></i>
           </button>
 
           <!-- Dropdown Menu -->
@@ -122,9 +122,8 @@
 
 
 
-<div class="container mx-auto py-8 px-4">
+<div class="mx-auto py-8 px-4">
 
-  <h1 class="text-3xl font-bold text-center mb-6">Available preloved books</h1>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
     <% @books.each do |book| %>
       <%= link_to book_path(book), class: "block" do %>
