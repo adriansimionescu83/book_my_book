@@ -27,6 +27,11 @@
     <%= form.label :language_id, class: "block text-sm font-medium text-gray-700" %>
     <%= form.collection_select :language_id, Language.all, :id, :name, {}, { class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
   </div>
+  
+    <div class="mb-4">
+    <%= form.label :age_group_id, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.collection_select :age_group_id, AgeGroup.all, :id, :name, {}, { class: "mt-1 block w-full min-w-[18rem] border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
+  </div>
 
   <div class="mb-4">
     <label class="block text-sm font-medium text-gray-700">
