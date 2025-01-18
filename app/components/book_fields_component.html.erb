@@ -1,10 +1,10 @@
 <div class="flex flex-col md:flex-row w-full h-full gap-4" data-controller="image-preview">
   <div class="w-full h-full flex flex-col justify-end gap-8 items-center">
-    <div class="w-[400px] h-[500px] bg-gray-100">
+    <div class="w-full h-full bg-gray-100">
       <% if @book.photo.attached? %>
-        <%= image_tag @book.photo, height: 640, width: 400, data: {image_preview_target: "preview"}, class: "w-full h-full object-cover" %>
+        <%= image_tag @book.photo, data: {image_preview_target: "preview"}, class: "w-full h-full object-contain" %>
       <% else %>
-        <%= image_tag 'bookwheel_logo.png', data: {image_preview_target: "preview"}, class: "w-full h-full object-cover opacity-40" %>
+        <%= image_tag 'bookwheel_logo.png', data: {image_preview_target: "preview"}, class: "w-full h-full object-contain opacity-40" %>
       <% end %>    
     </div>
 
