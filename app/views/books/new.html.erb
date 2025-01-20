@@ -1,4 +1,4 @@
-<%= form_with(model: @book, local: true, class: "mx-auto p-2 bg-white border flex flex-col rounded shadow-md m-5") do |form| %>
+<%= form_with(model: @book, local: true, class: "p-4 flex flex-col m-5") do |form| %>
   <%= render(BookFieldsComponent.new(book: @book, form: form))%>
   <div class="flex justify-center md:justify-end w-full">
     <%= form.submit 'Add Book', class: "mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded w-1/3" %>
