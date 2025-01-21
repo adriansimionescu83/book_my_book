@@ -1,18 +1,31 @@
-<div class="w-4/5 mx-auto my-8 p-6 flex gap-4 rounded-lg shadow-md bg-white">
+<div class="md:w-4/5 w-5/6 mx-auto my-4 p-2 flex flex-col md:flex-row gap-4 border rounded-lg shadow-md bg-white">
   <!-- Book Image -->
-  <div class="w-1/2 p-4 flex justify-center items-center shrink-0">
-    <%= cl_image_tag @book.photo.key, height: 500, width: 300, class: "w-full h-full object-contain" %>
-
+  <div class="w-full md:w-1/2 h-full p-2 flex justify-center items-center shrink-0">
+    <%= cl_image_tag @book.photo.key, height: 400, width: 250, class: "w-full h-full object-contain m-2" %>
   </div>
 
   <!-- Book Details -->
-  <div class="w-1/2 p-4 flex flex-col justify-between h-full">
-    <div>
+  <div class="w-full h-full p-2 flex flex-col justify-between gap-2">
+    <div class="flex flex-col gap-2 justify-between items-start">
+      <!-- Price and Button Container -->
+      <div class="py-4 w-full flex justify-between items-center border-y border-gray-200">
+        <!-- Book Price -->
+        <p class="text-green-700">
+          <span class="align-center text-sm">AED</span>
+          <span class="text-lg font-bold">            
+            <%= @book.price %>
+          </span>
+        </p>
+        <!-- Action Buttons -->
+        <div>
+          <%= button_to "Proceed to Buy", chats_path(book_id: @book.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" %>
+        </div>
+      </div>
       <!-- Book Title -->
-      <h1 class="text-2xl font-semibold text-gray-800"><%= @book.title %></h1>
+      <h1 class="pt-2 text-2xl font-semibold text-gray-800"><%= @book.title %></h1>
 
       <!-- Book Author -->
-      <p class="text-sm text-gray-600 mt-2">by <%= @book.author %></p>
+      <p class="text-sm text-gray-600">by <%= @book.author %></p>
 
       <!-- Book Category -->
       <p class="text-gray-600 mt-4">Category: <%= @book.category.name %></p>
@@ -24,26 +37,14 @@
       <p class="text-gray-600 mt-2">Sold by: <%= @book.user.full_name %></p>
     </div>
 
-    <div class="flex-grow mt-4 overflow-hidden">  
-      <!-- Book Description -->
+    <!-- Book Description -->
+    <div class="mt-4 overflow-hidden">  
       <div class="text-gray-600">
         <strong>Description:</strong>
         <p class="mt-1 whitespace-normal break-words">
           <%= @book.description %>
         </p>
       </div>
-    </div>
-
-    <div>
-      <!-- Book Price -->
-      <p class="text-xl font-bold text-green-700 mt-4">Price: AED <%= @book.price %></p>
-
-      <!-- Action Buttons -->
-      <div class="mt-6 flex gap-4">
-        <%= button_to "Proceed to Buy", chats_path(book_id: @book.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded" %>
-      </div>
-
-
     </div>
   </div>
 </div>

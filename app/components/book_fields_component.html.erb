@@ -1,0 +1,85 @@
+<div class="flex flex-col w-full gap-6" data-controller="image-preview">
+  <!-- Image Section -->
+  <div class="flex flex-col items-center gap-4">
+    <div class="w-40 h-60 bg-gray-100 p-2 border border-gray-300 rounded-md shadow-sm">
+      <% if @book.photo.attached? %>
+        <%= image_tag @book.photo, data: {image_preview_target: "preview"}, class: "w-full h-full object-cover rounded-md" %>
+      <% else %>
+        <%= image_tag 'bookwheel_logo.png', data: {image_preview_target: "preview"}, class: "w-full h-full object-cover opacity-40 rounded-md" %>
+      <% end %>    
+    </div>
+
+    <div class="w-full">
+      <%= @form.label :photo, "Upload Photo", class: "block text-sm text-gray-700" %>
+      <%= @form.file_field :photo, 
+        class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50",
+        direct_upload: true, 
+        data: { image_preview_target: 'input', action: "change->image-preview#preview" } %>
+    </div>
+  </div>
+
+  <!-- Fields Section -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <%# Title %>
+    <div>
+      <label class="block text-sm text-gray-700">
+        Title <span class="text-red-500">*</span>
+      </label>
+      <%= @form.text_field :title, required: true, 
+        class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+    </div>
+
+    <%# Author %>
+    <div>
+      <label class="block text-sm text-gray-700">
+        Author <span class="text-red-500">*</span>
+      </label>
+      <%= @form.text_field :author, required: true, 
+        class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+    </div>
+
+    <%# Description %>
+    <div class="col-span-1 md:col-span-2">
+      <%= @form.label :description, class: "block text-sm text-gray-700" %>
+      <%= @form.text_area :description, maxlength: 250, 
+        class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+    </div>
+
+    <%# Category %>
+    <div>
+      <%= @form.label :category_id, class: "block text-sm text-gray-700" %>
+      <%= @form.collection_select :category_id, Category.all, :id, :name, { prompt: 'Select a category' }, 
+        { class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
+    </div>
+
+    <%# Language %>
+    <div>
+      <%= @form.label :language_id, class: "block text-sm text-gray-700" %>
+      <%= @form.collection_select :language_id, Language.all, :id, :name, { prompt: 'Select a language', selected: Language.find_by(name: 'English').id }, 
+        { class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
+    </div>
+
+    <%# Age Group %>
+    <div>
+      <%= @form.label :age_group_id, class: "block text-sm text-gray-700" %>
+      <%= @form.collection_select :age_group_id, AgeGroup.all, :id, :name, { prompt: 'Select an age group' }, 
+        { class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
+    </div>
+
+    <%# Price %>
+    <div>
+      <label class="block text-sm text-gray-700">
+        Price <span class="text-red-500">*</span> <span class="text-gray-500">(AED)</span>
+      </label>
+      <%= @form.number_field :price, required: true, 
+        class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+    </div>
+
+    <%# Status %>
+    <div>
+      <%= @form.label :status, class: "block text-sm text-gray-700" %>
+      <%= @form.select :status, [['Available', 'available'], ['Sold', 'sold'], ['Reserved', 'reserved']], { selected: 'available' }, 
+        { class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" } %>
+    </div>
+  </div>
+</div>
