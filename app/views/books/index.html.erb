@@ -120,34 +120,41 @@
   <% end %>
 </div>
 
-
-
-<div class="mx-auto py-8 px-4">
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
+<%# Book List %>
+<div class="mx-auto py-4 px-2 md:px-4">
+  <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 justify-center">
     <% @books.each do |book| %>
-      <%= link_to book_path(book), class: "block" do %>
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
-          <!-- Book Image -->
-          <div class="relative">
-          <%= cl_image_tag book.photo.key, alt: book.title, class: "w-full h-48 object-cover" %>
+      <div class="relative bg-white shadow-lg border rounded-lg overflow-hidden flex flex-col w-full md:w-[300px] h-full group">
+        <%= link_to book_path(book), class: "block" do %>
+          <!-- Book Image Container (2:3 Aspect Ratio) -->
+          <div class="relative w-full aspect-[2/3] p-1 md:p-2 flex justify-center items-center">
+            <!-- Book Image with Gradient Overlay -->
+            <div class="relative w-full h-full">
+              <%= cl_image_tag book.photo.key, alt: book.title, class: "w-full h-full object-cover rounded-t" %>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            </div>
           </div>
 
           <!-- Book Info -->
-          <div class="flex flex-col flex-grow p-4 justify-between">
-            <div>
-              <h2 class="text-sm font-semibold truncate mb-2"><%= book.title %></h2>
-            </div>
-
-            <div class="flex flex-grow justify-between">
-              <p class="text-xs text-gray-600 truncate"><%= book.author %></p>   
-              <p class="text-sm text-gray-800 font-bold ml-4">AED <%= book.price %></p>            
-            </div>
-   
+          <div class="flex flex-col flex-grow px-2 py-2">
+            <p class="text-green-700">
+              <span class="align-center text-sm">AED</span>
+              <span class="text-lg font-semibold"><%= book.price %></span>
+            </p>
+            <h2 class="text-sm font-semibold leading-tight w-full"><%= book.title %></h2>
+            <p class="text-xs text-gray-400 leading-tight"><%= book.author %></p>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
+
+
 
