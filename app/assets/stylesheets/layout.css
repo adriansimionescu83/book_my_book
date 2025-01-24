@@ -1,8 +1,10 @@
-.grid-container {
+
+
+.page-container {
   display: grid;
-  min-height: 100vh; /* Ensures the container takes at least full viewport height */
+  min-height: 100vh; /* Ensures the container takes at least the full viewport height */
   width: 100%;
-  grid-template-rows: 80px 1fr auto; /* auto for footer height so it adjusts dynamically */
+  grid-template-rows: auto 1fr auto; /* The key fix: '1fr' makes the middle section expand */
   grid-template-areas: 
     "navbar"
     "app"
@@ -16,15 +18,17 @@
 
 .app-content {
   grid-area: app;
-  overflow-y: auto; /* Allow vertical scrolling if content exceeds the visible area */
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
-  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center items horizontally */
-  margin: 0 auto; /* Center the content horizontally */
-  width: 100%; /* Limit the width of the app content */
-  min-height: 0; /* Ensure the content section grows and shrinks as needed */
+  align-items: center; /* Centers items horizontally */
+  width: 100%;
+  min-height: 0;
+}
+
+.footer {
+  grid-area: footer;
+  text-align: center;
+  width: 100%;
 }
 
 .app-content::-webkit-scrollbar {
@@ -33,11 +37,6 @@
 
 .book-show {
   width: 100%; /* Ensures the component takes the full width of its parent */
-}
-
-.footer {
-  grid-area: footer;
-  text-align: center; /* Center the footer content */
 }
 
 /* For the cards grid container */

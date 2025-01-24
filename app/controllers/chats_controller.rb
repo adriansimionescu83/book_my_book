@@ -24,4 +24,5 @@ class ChatsController < ApplicationController
     # Pundit: authorize the access to this chat
     authorize @chat
   end
+
 end

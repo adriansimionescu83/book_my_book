@@ -1,27 +1,39 @@
-<div class="mx-auto py-8 px-4">
-  <h1 class="text-3xl font-bold text-center mb-6">My Books</h1>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
-    <% @books.each do |book| %>
-      <%= link_to edit_book_path(book), class: "block" do %>
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+<div class="mx-auto p-8 mx-4 w-full lg:w-1/2">
+  <h1 class="text-xl font-bold text-center pb-6">My Books</h1>
+  <div class="flex flex-col w-full gap-4">
+    <% if @books.present? %>
+      <% @books.each do |book| %>
+        <%= link_to edit_book_path(book), class: "flex items-center justify-start gap-4 border rounded-lg shadow-lg h-full w-full" do %>
           <!-- Book Image -->
-          <div class="relative">
-            <%= cl_image_tag book.photo.key, alt: book.title, class: "w-full h-48 object-cover" %>
-          </div>
+          <%= cl_image_tag book.photo.key, alt: book.title, class: "w-[100px] h-[120px] rounded-l-lg object-cover" %>
+          <div class="flex justify-between items-start flex-grow">
 
-          <!-- Book Info -->
-          <div class="flex flex-col flex-grow p-4 justify-between">
-            <div>
-              <h2 class="text-sm font-semibold truncate mb-2"><%= book.title %></h2>
+            <!-- Book Info -->
+            <div class="flex flex-col p-4 justify-between">
+              <h2 class="text-md font-semibold truncate mb-2"><%= book.title.humanize %></h2>
+
+              <div class="flex justify-between">
+                <p class="text-xs text-gray-600 truncate">by <span class></span><%= book.author %></p>   
+              </div>
             </div>
 
-            <div class="flex flex-grow justify-between">
-              <p class="text-xs text-gray-600 truncate"><%= book.author %></p>   
-              <p class="text-sm text-gray-800 font-bold ml-4">AED <%= book.price %></p>            
+
+            <div class="flex p-4">
+              <p class="text-green-700">
+                <span class="align-center text-sm">AED</span>
+                <span class="text-lg font-bold">            
+                  <%= book.price %>
+                </span>
+              </p>
             </div>
+
           </div>
-        </div>
+
+
+        <% end %>
       <% end %>
+    <% else %>  
+      <h2 class="text-sm text-center mt-3 font-semibold">You don't have any books yet</h2>
     <% end %>
   </div>
 </div>
