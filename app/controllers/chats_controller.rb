@@ -16,6 +16,8 @@ class ChatsController < ApplicationController
 
   def index
     @chats = policy_scope(Chat)
+
+    @pagy, @chats = pagy(@chats)
   end
 
   def show

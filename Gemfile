@@ -39,6 +39,9 @@ gem "pg_search"
 # Fontawesome
 gem "font-awesome-sass"
 
+# Page management
+gem 'pagy', '~> 9.1'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

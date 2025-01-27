@@ -3,10 +3,12 @@ class BooksController < ApplicationController
 
   def index
     @books = policy_scope(Book)
-  
+
     # Exclude the owner's books if the user is signed in
     @books = @books.where.not(user_id: current_user.id) if user_signed_in?
   
+    @pagy, @books = pagy(@books)
+
     # Prepare search conditions
     search_query = []
     search_query << params[:query] if params[:query].present?
@@ -63,6 +65,8 @@ class BooksController < ApplicationController
 
   def my_books
     @books = policy_scope(Book).where(user_id: current_user.id).order(created_at: :desc)
+    @pagy, @books = pagy(@books)
+
     authorize @books, policy_class: BookPolicy
   end
 

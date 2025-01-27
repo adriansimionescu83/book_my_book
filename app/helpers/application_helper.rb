@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def formatted_last_seen(user)
     return "Never logged in" unless user.last_seen_at
 
