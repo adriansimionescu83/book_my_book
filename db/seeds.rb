@@ -117,7 +117,7 @@ require 'open-uri'
 # AgeGroup.destroy_all
 
 # Age groups
-AgeGroup.create([{ name: "0-2 Years (Babies and Toddlers)" }, { name: "3-5 Years (Preschoolers)" }, { name: "6-8 Years (Early Readers)" }, { name: "9-12 Years (Middle Grade)" } , { name: "13-18 Years (Young Adult)" }])
+# AgeGroup.create([{ name: "0-2 Years (Babies and Toddlers)" }, { name: "3-5 Years (Preschoolers)" }, { name: "6-8 Years (Early Readers)" }, { name: "9-12 Years (Middle Grade)" } , { name: "13-18 Years (Young Adult)" }])
 
 # Create users (if not already created)
 user_ids = User.pluck(:id) # Retrieve all user IDs.
@@ -126,8 +126,8 @@ user_ids = User.pluck(:id) # Retrieve all user IDs.
 statuses = ['available', 'sold', 'reserved']
 
 # Destroy all books if books are already created
-Chat.destroy_all
-Book.destroy_all
+# Chat.destroy_all
+# Book.destroy_all
 
 50.times do
 
@@ -153,6 +153,8 @@ Book.destroy_all
     price: Faker::Commerce.price(range: 5.0..50.0), # Generates a price between $5.0 and $50.0
     status: statuses.sample, # Randomly assigns one of the statuses
   )
+
+  puts "Book #{}"
 
   book.photo.attach(io: file, filename: "nes.png", content_type: "image/png")
 
