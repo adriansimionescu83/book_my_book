@@ -42,9 +42,6 @@ gem "font-awesome-sass"
 # Page management
 gem 'pagy', '~> 9.1'
 
-# When mail is sent from your application, Letter Opener will open a preview in the browser instead of sending.
-gem 'letter_opener', '~> 1.10'
-
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -83,6 +80,9 @@ group :development, :test do
 end
 
 group :development do
+  # When mail is sent from your application, Letter Opener will open a preview in the browser instead of sending.
+  gem 'letter_opener', '~> 1.10'
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
